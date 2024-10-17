@@ -1,0 +1,5 @@
+db_name="test"
+project_name="terraform"
+db_user="root"
+# al menos 8 caracteres
+db_password="rootrootroot"

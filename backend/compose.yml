@@ -1,0 +1,25 @@
+services:
+  app:
+    image: pepesan/awscds_backend:latest
+    container_name: node_app
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=test
+    depends_on:
+      - mysql
+    command: npm start
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql

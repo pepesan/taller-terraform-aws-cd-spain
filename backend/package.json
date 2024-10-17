@@ -1,0 +1,15 @@
+{
+  "name": "backend-app",
+  "version": "1.0.0",
+  "description": "Backend para conectar con la base de datos MySQL en AWS Lightsail",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.1",
+    "mysql2": "^3.11.3"
+  },
+  "author": "Tu Nombre",
+  "license": "ISC"
+}
