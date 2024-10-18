@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Usuarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .user-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .user-table th, .user-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .user-table th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>Lista de Usuarios</h1>
+<div id="user-list"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const userListContainer = document.getElementById('user-list');
+
+        // Datos iniciales en caso de error con la petición AJAX
+        const initialData = [
+            {
+                nombre_usuario: 'default_admin',
+                correo_electronico: 'default_admin@example.com',
+                nombre_completo: 'Default Admin',
+                rol: 'admin'
+            },
+            {
+                nombre_usuario: 'default_user',
+                correo_electronico: 'default_user@example.com',
+                nombre_completo: 'Default User',
+                rol: 'usuario'
+            }
+        ];
+
+        // Función para renderizar la tabla de usuarios
+        function renderUserTable(users) {
+            let table = `
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre de Usuario</th>
+                                <th>Correo Electrónico</th>
+                                <th>Nombre Completo</th>
+                                <th>Rol</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+            users.forEach(user => {
+                table += `
+                        <tr>
+                            <td>${user.nombre_usuario}</td>
+                            <td>${user.correo_electronico}</td>
+                            <td>${user.nombre_completo}</td>
+                            <td>${user.rol}</td>
+                        </tr>
+                    `;
+            });
+
+            table += `
+                        </tbody>
+                    </table>
+                `;
+
+            userListContainer.innerHTML = table;
+        }
+
+        // Función para mostrar un mensaje de error
+        function showError(message) {
+            userListContainer.innerHTML = `<p class="error-message">${message}</p>`;
+        }
+        let url = 'http://localhost:3000/users';
+        // Realizar la petición AJAX
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener los datos');
+                }
+                return response.json();
+            })
+            .then(data => {
+                renderUserTable(data);
+            })
+            .catch(error => {
+                console.error('Error en la solicitud:', error);
+                showError('No se pudieron cargar los datos de los usuarios. Mostrando datos por defecto.');
+                renderUserTable(initialData);
+            });
+    });
+</script>
+</body>
+</html>

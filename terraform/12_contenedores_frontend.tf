@@ -21,7 +21,7 @@ resource "aws_lightsail_container_service" "frontend_service" {
 resource "aws_lightsail_container_service_deployment_version" "example_front" {
   container {
     container_name = "hello-world"
-    image          = "nginx:latest"
+    image          = "pepesan/awscds_frontend:latest"
 
     command = []
 

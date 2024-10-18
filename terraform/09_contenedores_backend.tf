@@ -20,7 +20,7 @@ resource "aws_lightsail_container_service" "backend_service" {
 
 resource "aws_lightsail_container_service_deployment_version" "example" {
   container {
-    container_name = "hello-world"
+    container_name = "hello-back"
     image          = "pepesan/awscds_backend:latest"
 
     command = []
@@ -40,7 +40,7 @@ resource "aws_lightsail_container_service_deployment_version" "example" {
   }
 
   public_endpoint {
-    container_name = "hello-world"
+    container_name = "hello-back"
     container_port = 3000
 
     health_check {

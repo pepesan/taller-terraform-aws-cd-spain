@@ -1,0 +1,7 @@
+services:
+  web:
+    image: pepesan/mi-web-app:latest
+    container_name: mi-web-app
+    ports:
+      - "8080:80"
+    restart: unless-stopped
