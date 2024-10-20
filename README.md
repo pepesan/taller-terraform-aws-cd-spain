@@ -14,3 +14,5 @@
 * init: inicialización
 * apply: aplicación de cambios
 * destroy: destrucción de cambios
+## Presentación
+Presentación disponibles desde el directorio pdf 
